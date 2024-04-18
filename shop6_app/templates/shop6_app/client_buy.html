@@ -1,0 +1,39 @@
+{% extends 'shop6_app/base.html' %} {% block title%} Покупки клиента {%
+endblock%} {% block content%}
+
+<h1>{{ client.name}} - Продуктовые покупки</h1>
+
+<h2>За последние 7 дней</h2>
+<ul>
+  {% for buy in buy_last_7_days %} {% for product in buy.products.all %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>За последние 30 дней</h2>
+<ul>
+  {% for buy in buy_last_30_days %} {% for product in buy.products.all %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>За последние 365 дней</h2>
+<ul>
+  {% for buy in buy_last_365_days%} {% for product in buy.products.all %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>Продукты</h2>
+<ul>
+  {% for product in all_products%}
+  <li>{{ product.name}} - {{ product.price }}</li>
+  {% endfor %}
+</ul>
+
+<h2>Продукт</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ product_form.as_p }}
+  <button type="submit">Add Product</button>
+</form>
+{% endblock %}
